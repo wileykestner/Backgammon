@@ -82,7 +82,7 @@ class BoardController: UIViewController
                                          multiplier: 0.5,
                                          constant: (diceCupPadding * -1.5)).isActive = true
 
-        diceCupView.topAnchor.constraint(equalTo: sidebarView.topAnchor).isActive = true
+        diceCupView.centerYAnchor.constraint(equalTo: sidebarView.centerYAnchor).isActive = true
         diceCupView.leadingAnchor.constraint(equalTo: sidebarView.leadingAnchor, constant: casePadding).isActive = true
         diceCupView.widthAnchor.constraint(equalTo: sidebarView.widthAnchor, constant: -casePadding).isActive = true
         diceCupView.heightAnchor.constraint(equalTo: sidebarView.widthAnchor).isActive = true
