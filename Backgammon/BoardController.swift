@@ -16,7 +16,7 @@ class BoardController: UIViewController
     let centerOffset: CGFloat = 0.0
     let casePadding: CGFloat = 10.0
     let diceCupPadding: CGFloat = 4.0
-    var sidebarWidthRatio: CGFloat = 0.2
+    let sidebarWidthRatio: CGFloat = 0.15
 
     // MARK: - UIViewController
 
@@ -28,8 +28,9 @@ class BoardController: UIViewController
         let tapRecognizer2 = UITapGestureRecognizer(target: self, action: #selector(didTapDice(sender:)))
         let tapRecognizer3 = UITapGestureRecognizer(target: self, action: #selector(didTapDice(sender:)))
 
-        let boardView = BoardView()
+        let caseContainerView = UIView()
         let caseView = UIView()
+        let boardView = BoardView()
         let sidebarView = UIView()
         let diceCupView = UIView()
         let dieView1 = DieView()
@@ -39,6 +40,7 @@ class BoardController: UIViewController
         dieView1.addGestureRecognizer(tapRecognizer2)
         dieView2.addGestureRecognizer(tapRecognizer3)
 
+        caseContainerView.translatesAutoresizingMaskIntoConstraints = false
         caseView.translatesAutoresizingMaskIntoConstraints = false
         boardView.translatesAutoresizingMaskIntoConstraints = false
         sidebarView.translatesAutoresizingMaskIntoConstraints = false
@@ -46,12 +48,18 @@ class BoardController: UIViewController
         dieView1.translatesAutoresizingMaskIntoConstraints = false
         dieView2.translatesAutoresizingMaskIntoConstraints = false
 
+        view.addSubview(caseContainerView)
+
+        caseContainerView.addSubview(caseView)
+
         caseView.addSubview(boardView)
+        caseView.addSubview(sidebarView)
+
         sidebarView.addSubview(diceCupView)
+
         diceCupView.addSubview(dieView1)
         diceCupView.addSubview(dieView2)
-        view.addSubview(caseView)
-        view.addSubview(sidebarView)
+
         _caseView = caseView
         _dieView1 = dieView1
         _dieView2 = dieView2
@@ -74,32 +82,54 @@ class BoardController: UIViewController
                                          multiplier: 0.5,
                                          constant: (diceCupPadding * -1.5)).isActive = true
 
-        diceCupView.topAnchor.constraint(equalTo: sidebarView.topAnchor, constant: casePadding).isActive = true
+        diceCupView.topAnchor.constraint(equalTo: sidebarView.topAnchor).isActive = true
         diceCupView.leadingAnchor.constraint(equalTo: sidebarView.leadingAnchor, constant: casePadding).isActive = true
-        diceCupView.widthAnchor.constraint(equalTo: sidebarView.widthAnchor, constant: (casePadding * -2.0)).isActive = true
-        diceCupView.heightAnchor.constraint(equalTo: sidebarView.widthAnchor, constant: (casePadding * -2.0)).isActive = true
+        diceCupView.widthAnchor.constraint(equalTo: sidebarView.widthAnchor, constant: -casePadding).isActive = true
+        diceCupView.heightAnchor.constraint(equalTo: sidebarView.widthAnchor).isActive = true
 
-        caseView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: casePadding).isActive = true
-        sidebarView.leadingAnchor.constraint(equalTo: caseView.trailingAnchor, constant: casePadding).isActive = true
-        sidebarView.widthAnchor.constraint(equalTo: caseView.widthAnchor, multiplier: sidebarWidthRatio).isActive = true
-        view.trailingAnchor.constraint(equalTo: sidebarView.trailingAnchor, constant: casePadding).isActive = true
+        let boardViewConstraints = [
+            boardView.leadingAnchor.constraint(equalTo: caseView.leadingAnchor, constant: casePadding),
+            boardView.widthAnchor.constraint(equalTo: caseView.widthAnchor, multiplier: 1 - sidebarWidthRatio, constant: -casePadding * 2),
+            boardView.topAnchor.constraint(equalTo: caseView.topAnchor, constant: casePadding),
+            caseView.bottomAnchor.constraint(equalTo: boardView.bottomAnchor, constant: casePadding),
+        ]
 
-        sidebarView.topAnchor.constraint(equalTo: caseView.topAnchor).isActive = true
-        sidebarView.bottomAnchor.constraint(equalTo: caseView.bottomAnchor).isActive = true
+        let sidebarViewConstraints = [
+            sidebarView.topAnchor.constraint(equalTo: caseView.topAnchor, constant: casePadding),
+            sidebarView.bottomAnchor.constraint(equalTo: caseView.bottomAnchor, constant: -casePadding),
+            sidebarView.trailingAnchor.constraint(equalTo: caseView.trailingAnchor, constant: -casePadding),
+            sidebarView.widthAnchor.constraint(equalTo: caseView.widthAnchor, multiplier: sidebarWidthRatio),
+        ]
 
-        caseView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: centerOffset).isActive = true
-        caseView.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 201/384).isActive = true
+        let caseViewLeadingAnchor = caseView.leadingAnchor.constraint(equalTo: caseContainerView.leadingAnchor)
+        caseViewLeadingAnchor.priority = .defaultLow
+        let caseViewTrailingAnchor = caseView.trailingAnchor.constraint(equalTo: caseContainerView.trailingAnchor)
+        caseViewTrailingAnchor.priority = .defaultLow
 
-        boardView.leadingAnchor.constraint(equalTo: caseView.leadingAnchor, constant: casePadding).isActive = true
-        caseView.trailingAnchor.constraint(equalTo: boardView.trailingAnchor, constant: casePadding).isActive = true
-        boardView.topAnchor.constraint(equalTo: caseView.topAnchor, constant: casePadding).isActive = true
-        caseView.bottomAnchor.constraint(equalTo: boardView.bottomAnchor, constant: casePadding).isActive = true
+        let caseViewConstraints = [
+            caseView.centerYAnchor.constraint(equalTo: caseContainerView.centerYAnchor),
+            caseView.centerXAnchor.constraint(equalTo: caseContainerView.centerXAnchor),
+            caseViewLeadingAnchor,
+            caseViewTrailingAnchor,
+            caseView.heightAnchor.constraint(lessThanOrEqualTo: caseContainerView.heightAnchor),
+            caseView.heightAnchor.constraint(equalTo: caseView.widthAnchor, multiplier: 201/384),
+        ]
 
-        caseView.backgroundColor = caseColor
-        sidebarView.backgroundColor = sidebarColor
+        let caseContainerViewConstraints = [
+            caseContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            caseContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            caseContainerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            caseContainerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+        ]
+        let allConstraints = caseContainerViewConstraints + caseViewConstraints + boardViewConstraints + sidebarViewConstraints
+        NSLayoutConstraint.activate(allConstraints)
+
         diceCupView.backgroundColor = diceCupColor
         dieView1.backgroundColor = diceColor
         dieView2.backgroundColor = diceColor
+        sidebarView.backgroundColor = sidebarColor
+        caseView.backgroundColor = caseColor
+        caseContainerView.backgroundColor = backgroundColor
         view.backgroundColor = backgroundColor
     }
 

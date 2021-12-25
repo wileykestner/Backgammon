@@ -7,7 +7,6 @@ class BoardView: UIView
     let horizontalPadding: CGFloat = 10.0
     let columnsPerQuadrant: Int = 6
     let maxStonesPerColumn: Int = 5
-    let quadrantCount: Int = 4
     let gapBetweenStonesHeight: CGFloat = 2.0
 
     let _caseColor = UIColor(red: 102.0/255.0, green: 42.0/255.0, blue: 0.0/255.0, alpha: 1.0)
@@ -213,11 +212,14 @@ class BoardView: UIView
         let numberOfGapsSurroundingStones = maxStonesPerColumn + 1
         let aggregateGapHeight = CGFloat(numberOfGapsSurroundingStones) * gapBetweenStonesHeight
         let spaceRemainingForStones = quadrantHeight - aggregateGapHeight
-        let stoneHeight = spaceRemainingForStones / CGFloat(maxStonesPerColumn)
+        let stoneDiameter = spaceRemainingForStones / CGFloat(maxStonesPerColumn)
 
         let stonePlacementDirection: CGFloat = drawingFromTopToBottom ? 1 : -1
         let quadrantDirectionInt: Int = drawingFromTopToBottom ? 0 : 1
         let quadrantDirectionFloat: CGFloat = CGFloat(quadrantDirectionInt)
+        let differenceBetweenStoneDiameterAndBaseWidth = columnBaseWidth - stoneDiameter
+        let stoneXOffset = differenceBetweenStoneDiameterAndBaseWidth / 2.0
+
         for stoneIndex in 0..<stoneCount
         {
             context.beginPath()
@@ -225,7 +227,7 @@ class BoardView: UIView
             let yStart: CGFloat
             if stoneCount < 6
             {
-                yStart = (leadingBaseEdgeY * quadrantDirectionFloat) + (CGFloat(stoneIndex + quadrantDirectionInt) * stoneHeight * stonePlacementDirection) + (stonePlacementDirection * gapBetweenStonesHeight * CGFloat(stoneIndex))
+                yStart = (leadingBaseEdgeY * quadrantDirectionFloat) + (CGFloat(stoneIndex + quadrantDirectionInt) * stoneDiameter * stonePlacementDirection) + (stonePlacementDirection * gapBetweenStonesHeight * CGFloat(stoneIndex))
             }
             else
             {
@@ -233,10 +235,10 @@ class BoardView: UIView
                 yStart = CGFloat(stoneIndex) * miniStoneHeight
             }
 
-            let stoneRect = CGRect(x: leadingBaseEdgeX,
+            let stoneRect = CGRect(x: leadingBaseEdgeX + stoneXOffset,
                                    y: yStart,
-                                   width: stoneHeight,
-                                   height: stoneHeight)
+                                   width: stoneDiameter,
+                                   height: stoneDiameter)
             context.addEllipse(in: stoneRect)
             context.closePath()
             context.setFillColor(stoneColor)
