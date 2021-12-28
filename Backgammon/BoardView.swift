@@ -239,7 +239,7 @@ class BoardView: UIView
 
             context.addEllipse(in: stoneRect)
             context.closePath()
-            context.setStrokeColor(UIColor.red.cgColor)
+            context.setStrokeColor(UIColor.darkGray.cgColor)
             context.setLineWidth(2.0)
             context.setFillColor(stoneColor)
             context.drawPath(using: .fillStroke)
