@@ -4,10 +4,11 @@ import UIKit
 class BoardView: UIView
 {
     private let _board = initialBoard()
-    let horizontalPadding: CGFloat = 10.0
-    let columnsPerQuadrant: Int = 6
-    let maxStonesPerColumn: Int = 5
-    let gapBetweenStonesHeight: CGFloat = 2.0
+    let _horizontalPadding: CGFloat = 10.0
+    let _columnsPerQuadrant: Int = 6
+    let _maxStonesPerColumn: Int = 5
+    let _gapBetweenStonesHeight: CGFloat = 2.0
+    let _stoneBorderWidth: CGFloat = 2.0
 
     let _caseColor = UIColor(red: 102.0/255.0, green: 42.0/255.0, blue: 0.0/255.0, alpha: 1.0)
     let _backgroundColor = UIColor(red: 201.0/255.0, green: 115.0/255.0, blue: 58.0/255.0, alpha: 1.0)
@@ -15,6 +16,7 @@ class BoardView: UIView
     let _darkColumnColor = UIColor(red: 104.0/255.0, green: 61.0/255.0, blue: 9.0/255.0, alpha: 1.0)
     let _lightStoneColor = UIColor.white
     let _darkStoneColor = UIColor.black
+    let _stoneBorderColor = UIColor.darkGray
 
     override init(frame: CGRect)
     {
@@ -64,10 +66,10 @@ class BoardView: UIView
         context.setFillColor(_caseColor.cgColor)
         context.fillPath()
 
-        let gutterCount = columnsPerQuadrant + 1
-        let combinedGutterWidth = CGFloat(gutterCount) * horizontalPadding
-        let columnBaseWidth = (quadrantWidth - combinedGutterWidth) / CGFloat(columnsPerQuadrant)
-        let maxStoneHeight = quadrantHeight / CGFloat(maxStonesPerColumn)
+        let gutterCount = _columnsPerQuadrant + 1
+        let combinedGutterWidth = CGFloat(gutterCount) * _horizontalPadding
+        let columnBaseWidth = (quadrantWidth - combinedGutterWidth) / CGFloat(_columnsPerQuadrant)
+        let maxStoneHeight = quadrantHeight / CGFloat(_maxStonesPerColumn)
 
         for (index, rank) in _board.ranks.enumerated()
         {
@@ -84,10 +86,10 @@ class BoardView: UIView
             {
             // Northeast quadrant
             //
-            case 0..<(columnsPerQuadrant * 1):
+            case 0..<(_columnsPerQuadrant * 1):
                 context.beginPath()
-                let gutterStop = CGFloat(index % columnsPerQuadrant + 1)
-                let leadingBaseEdgeX = northEast.maxX - (columnBaseWidth * gutterStop) - (horizontalPadding * gutterStop)
+                let gutterStop = CGFloat(index % _columnsPerQuadrant + 1)
+                let leadingBaseEdgeX = northEast.maxX - (columnBaseWidth * gutterStop) - (_horizontalPadding * gutterStop)
                 let trailingBaseEdgeX = leadingBaseEdgeX + columnBaseWidth
                 let peakX = leadingBaseEdgeX + (columnBaseWidth / 2.0)
                 context.move(to: CGPoint(x: leadingBaseEdgeX, y: northEast.minY))
@@ -110,10 +112,10 @@ class BoardView: UIView
 
             // Northwest quadrant
             //
-            case (columnsPerQuadrant * 1)..<(columnsPerQuadrant * 2):
+            case (_columnsPerQuadrant * 1)..<(_columnsPerQuadrant * 2):
                 context.beginPath()
-                let gutterStop = CGFloat(index % columnsPerQuadrant + 1)
-                let leadingBaseEdgeX = northWest.maxX - (columnBaseWidth * gutterStop) - (horizontalPadding * gutterStop)
+                let gutterStop = CGFloat(index % _columnsPerQuadrant + 1)
+                let leadingBaseEdgeX = northWest.maxX - (columnBaseWidth * gutterStop) - (_horizontalPadding * gutterStop)
                 let trailingBaseEdgeX = leadingBaseEdgeX + columnBaseWidth
                 let peakX = leadingBaseEdgeX + (columnBaseWidth / 2.0)
                 context.move(to: CGPoint(x: leadingBaseEdgeX, y: northWest.minY))
@@ -136,10 +138,10 @@ class BoardView: UIView
 
             // Southwest quadrant
             //
-            case (columnsPerQuadrant * 2)..<(columnsPerQuadrant * 3):
+            case (_columnsPerQuadrant * 2)..<(_columnsPerQuadrant * 3):
                 context.beginPath()
-                let gutterStop = CGFloat(index % columnsPerQuadrant)
-                let leadingBaseEdgeX = southWest.minX + (columnBaseWidth * gutterStop) + (horizontalPadding + (horizontalPadding * gutterStop))
+                let gutterStop = CGFloat(index % _columnsPerQuadrant)
+                let leadingBaseEdgeX = southWest.minX + (columnBaseWidth * gutterStop) + (_horizontalPadding + (_horizontalPadding * gutterStop))
                 let trailingBaseEdgeX = leadingBaseEdgeX + columnBaseWidth
                 let peakX = leadingBaseEdgeX + (columnBaseWidth / 2.0)
                 context.move(to: CGPoint(x: leadingBaseEdgeX, y: southWest.maxY))
@@ -162,11 +164,11 @@ class BoardView: UIView
 
             // Southeast quadrant
             //
-            case (columnsPerQuadrant * 3)..<(columnsPerQuadrant * 4):
+            case (_columnsPerQuadrant * 3)..<(_columnsPerQuadrant * 4):
 
                 context.beginPath()
-                let gutterStop = CGFloat(index % columnsPerQuadrant)
-                let leadingBaseEdgeX = southEast.minX + (columnBaseWidth * gutterStop) + (horizontalPadding + (horizontalPadding * gutterStop))
+                let gutterStop = CGFloat(index % _columnsPerQuadrant)
+                let leadingBaseEdgeX = southEast.minX + (columnBaseWidth * gutterStop) + (_horizontalPadding + (_horizontalPadding * gutterStop))
                 let trailingBaseEdgeX = leadingBaseEdgeX + columnBaseWidth
                 let peakX = leadingBaseEdgeX + (columnBaseWidth / 2.0)
                 context.move(to: CGPoint(x: leadingBaseEdgeX, y: southEast.maxY))
@@ -209,10 +211,10 @@ class BoardView: UIView
                     columnBaseWidth: CGFloat,
                     drawingFromTopToBottom: Bool) -> Void
     {
-        let numberOfGapsSurroundingStones = maxStonesPerColumn + 1
-        let aggregateGapHeight = CGFloat(numberOfGapsSurroundingStones) * gapBetweenStonesHeight
+        let numberOfGapsSurroundingStones = _maxStonesPerColumn + 1
+        let aggregateGapHeight = CGFloat(numberOfGapsSurroundingStones) * _gapBetweenStonesHeight
         let spaceRemainingForStones = quadrantHeight - aggregateGapHeight
-        let stoneDiameter = spaceRemainingForStones / CGFloat(maxStonesPerColumn)
+        let stoneDiameter = spaceRemainingForStones / CGFloat(_maxStonesPerColumn)
 
         let stonePlacementDirection: CGFloat = drawingFromTopToBottom ? 1 : -1
         let quadrantDirectionInt: Int = drawingFromTopToBottom ? 0 : 1
@@ -223,8 +225,8 @@ class BoardView: UIView
         for stoneIndex in 0..<stoneCount
         {
             context.beginPath()
-            let stoneYOffset = stoneCount <= maxStonesPerColumn ? stoneDiameter : spaceRemainingForStones / CGFloat(stoneCount)
-            let gapOrOverlap = stoneCount <= maxStonesPerColumn ? gapBetweenStonesHeight : stoneYOffset - stoneDiameter
+            let stoneYOffset = stoneCount <= _maxStonesPerColumn ? stoneDiameter : spaceRemainingForStones / CGFloat(stoneCount)
+            let gapOrOverlap = stoneCount <= _maxStonesPerColumn ? _gapBetweenStonesHeight : stoneYOffset - stoneDiameter
 
             var yStart: CGFloat
             yStart = leadingBaseEdgeY
@@ -239,8 +241,8 @@ class BoardView: UIView
 
             context.addEllipse(in: stoneRect)
             context.closePath()
-            context.setStrokeColor(UIColor.darkGray.cgColor)
-            context.setLineWidth(2.0)
+            context.setStrokeColor(_stoneBorderColor.cgColor)
+            context.setLineWidth(_stoneBorderWidth)
             context.setFillColor(stoneColor)
             context.drawPath(using: .fillStroke)
         }
