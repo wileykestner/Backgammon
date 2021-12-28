@@ -223,26 +223,26 @@ class BoardView: UIView
         for stoneIndex in 0..<stoneCount
         {
             context.beginPath()
+            let stoneYOffset = stoneCount <= maxStonesPerColumn ? stoneDiameter : spaceRemainingForStones / CGFloat(stoneCount)
+            let gapOrOverlap = stoneCount <= maxStonesPerColumn ? gapBetweenStonesHeight : stoneYOffset - stoneDiameter
 
-            let yStart: CGFloat
-            if stoneCount < 6
-            {
-                yStart = (leadingBaseEdgeY * quadrantDirectionFloat) + (CGFloat(stoneIndex + quadrantDirectionInt) * stoneDiameter * stonePlacementDirection) + (stonePlacementDirection * gapBetweenStonesHeight * CGFloat(stoneIndex))
-            }
-            else
-            {
-                let miniStoneHeight = quadrantHeight / CGFloat(stoneCount)
-                yStart = CGFloat(stoneIndex) * miniStoneHeight
-            }
+            var yStart: CGFloat
+            yStart = leadingBaseEdgeY
+            yStart *= quadrantDirectionFloat
+            yStart += CGFloat(stoneIndex + quadrantDirectionInt) * stoneDiameter * stonePlacementDirection
+            yStart += gapOrOverlap * CGFloat(stoneIndex) * stonePlacementDirection
 
             let stoneRect = CGRect(x: leadingBaseEdgeX + stoneXOffset,
                                    y: yStart,
                                    width: stoneDiameter,
                                    height: stoneDiameter)
+
             context.addEllipse(in: stoneRect)
             context.closePath()
+            context.setStrokeColor(UIColor.red.cgColor)
+            context.setLineWidth(2.0)
             context.setFillColor(stoneColor)
-            context.fillPath()
+            context.drawPath(using: .fillStroke)
         }
     }
 }
