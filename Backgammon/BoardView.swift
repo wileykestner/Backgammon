@@ -7,8 +7,9 @@ class BoardView: UIView
     let _horizontalPadding: CGFloat = 10.0
     let _columnsPerQuadrant: Int = 6
     let _maxStonesPerColumn: Int = 5
-    let _gapBetweenStonesHeight: CGFloat = 2.0
     let _stoneBorderWidth: CGFloat = 2.0
+    let _gapBetweenStonesHeight: CGFloat = 2.0
+
 
     let _caseColor = UIColor(red: 102.0/255.0, green: 42.0/255.0, blue: 0.0/255.0, alpha: 1.0)
     let _backgroundColor = UIColor(red: 201.0/255.0, green: 115.0/255.0, blue: 58.0/255.0, alpha: 1.0)
@@ -16,6 +17,7 @@ class BoardView: UIView
     let _darkColumnColor = UIColor(red: 104.0/255.0, green: 61.0/255.0, blue: 9.0/255.0, alpha: 1.0)
     let _lightStoneColor = UIColor.white
     let _darkStoneColor = UIColor.black
+    let _emptyStoneColor = UIColor.clear
     let _stoneBorderColor = UIColor.darkGray
 
     override init(frame: CGRect)
@@ -71,15 +73,20 @@ class BoardView: UIView
         let columnBaseWidth = (quadrantWidth - combinedGutterWidth) / CGFloat(_columnsPerQuadrant)
         let maxStoneHeight = quadrantHeight / CGFloat(_maxStonesPerColumn)
 
-        for (index, rank) in _board.ranks.enumerated()
+        
+        for (index, rank) in render(board: _board)
         {
             let columnColor = (index % 2 == 0) ? _lightColumnColor : _darkColumnColor;
             let stoneColor: CGColor
-            switch rank.stone
+            let stoneCount: UInt8 = getUInt(rank: rank)
+            switch rank
             {
-            case .white: stoneColor = UIColor.white.cgColor
-            case .black: stoneColor = UIColor.black.cgColor
-            case .empty: stoneColor = UIColor.clear.cgColor
+            case .white:
+                stoneColor = self._lightStoneColor.cgColor
+            case .black:
+                stoneColor = self._darkStoneColor.cgColor
+            case .empty:
+                stoneColor = self._emptyStoneColor.cgColor
             }
 
             switch index
@@ -101,7 +108,7 @@ class BoardView: UIView
                 context.fillPath()
 
                 drawStones(context: context,
-                           stoneCount: rank.count,
+                           stoneCount: stoneCount,
                            stoneColor: stoneColor,
                            maxStoneHeight: maxStoneHeight,
                            quadrantHeight: quadrantHeight,
@@ -127,7 +134,7 @@ class BoardView: UIView
                 context.fillPath()
 
                 drawStones(context: context,
-                           stoneCount: rank.count,
+                           stoneCount: stoneCount,
                            stoneColor: stoneColor,
                            maxStoneHeight: maxStoneHeight,
                            quadrantHeight: quadrantHeight,
@@ -153,7 +160,7 @@ class BoardView: UIView
                 context.fillPath()
 
                 drawStones(context: context,
-                           stoneCount: rank.count,
+                           stoneCount: stoneCount,
                            stoneColor: stoneColor,
                            maxStoneHeight: maxStoneHeight,
                            quadrantHeight: quadrantHeight,
@@ -180,7 +187,7 @@ class BoardView: UIView
                 context.fillPath()
 
                 drawStones(context: context,
-                           stoneCount: rank.count,
+                           stoneCount: stoneCount,
                            stoneColor: stoneColor,
                            maxStoneHeight: maxStoneHeight,
                            quadrantHeight: quadrantHeight,
@@ -202,7 +209,7 @@ class BoardView: UIView
     }
 
     func drawStones(context: CGContext,
-                    stoneCount: Int,
+                    stoneCount: UInt8,
                     stoneColor: CGColor,
                     maxStoneHeight: CGFloat,
                     quadrantHeight: CGFloat,
@@ -217,7 +224,7 @@ class BoardView: UIView
         let stoneDiameter = spaceRemainingForStones / CGFloat(_maxStonesPerColumn)
 
         let stonePlacementDirection: CGFloat = drawingFromTopToBottom ? 1 : -1
-        let quadrantDirectionInt: Int = drawingFromTopToBottom ? 0 : 1
+        let quadrantDirectionInt: UInt8 = drawingFromTopToBottom ? 0 : 1
         let quadrantDirectionFloat: CGFloat = CGFloat(quadrantDirectionInt)
         let differenceBetweenStoneDiameterAndBaseWidth = columnBaseWidth - stoneDiameter
         let stoneXOffset = differenceBetweenStoneDiameterAndBaseWidth / 2.0
