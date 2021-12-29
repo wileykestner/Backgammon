@@ -3,7 +3,7 @@ import UIKit
 
 class BoardView: UIView
 {
-    private let _board = initialBoard()
+    private let _board = Board.getInitial()
     let _horizontalPadding: CGFloat = 10.0
     let _columnsPerQuadrant: Int = 6
     let _maxStonesPerColumn: Int = 5
@@ -78,7 +78,7 @@ class BoardView: UIView
         {
             let columnColor = (index % 2 == 0) ? _lightColumnColor : _darkColumnColor;
             let stoneColor: CGColor
-            let stoneCount: UInt8 = getUInt(rank: rank)
+            let stoneCount: UInt8 = getUInt8(rank: rank)
             switch rank
             {
             case .white:
