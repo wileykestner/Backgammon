@@ -114,7 +114,7 @@ struct Board
 
     static func getInitial() -> Board {
         let initialRanks: TwentyFourBackgammonRanks = (
-            .white(.seven),
+            .white(.two),
             .empty,
             .empty,
             .empty,
@@ -137,7 +137,7 @@ struct Board
             .empty,
             .empty,
             .empty,
-            .black(.eight)
+            .black(.two)
         )
 
         return Board(ranks: initialRanks, nextTurn: .undecided, blackJail: .empty, whiteJail: .empty)

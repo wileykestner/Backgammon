@@ -105,6 +105,8 @@ class BoardController: UIViewController
         caseViewLeadingAnchor.priority = .defaultLow
         let caseViewTrailingAnchor = caseView.trailingAnchor.constraint(equalTo: caseContainerView.trailingAnchor)
         caseViewTrailingAnchor.priority = .defaultLow
+        let caseViewWidthAnchor = caseView.widthAnchor.constraint(lessThanOrEqualTo: caseContainerView.widthAnchor)
+        caseViewWidthAnchor.priority = .defaultHigh
 
         let caseViewConstraints = [
             caseView.centerYAnchor.constraint(equalTo: caseContainerView.centerYAnchor),
@@ -113,6 +115,7 @@ class BoardController: UIViewController
             caseViewTrailingAnchor,
             caseView.heightAnchor.constraint(lessThanOrEqualTo: caseContainerView.heightAnchor),
             caseView.heightAnchor.constraint(equalTo: caseView.widthAnchor, multiplier: 201/384),
+            caseViewWidthAnchor
         ]
 
         let caseContainerViewConstraints = [
