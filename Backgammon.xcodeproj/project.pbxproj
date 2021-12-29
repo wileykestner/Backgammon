@@ -14,6 +14,8 @@
 		B89197F71F897E77004EEBCE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B89197F61F897E77004EEBCE /* Assets.xcassets */; };
 		B89197FA1F897E77004EEBCE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B89197F81F897E77004EEBCE /* LaunchScreen.storyboard */; };
 		B89198021F89809D004EEBCE /* BoardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89198011F89809D004EEBCE /* BoardController.swift */; };
+		B8D7532F277BEDBC00F89F0D /* Die.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D7532E277BEDBC00F89F0D /* Die.swift */; };
+		B8D75331277BF51200F89F0D /* DieCup.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D75330277BF51200F89F0D /* DieCup.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		B89197F91F897E77004EEBCE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B89197FB1F897E77004EEBCE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B89198011F89809D004EEBCE /* BoardController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardController.swift; sourceTree = "<group>"; };
+		B8D7532E277BEDBC00F89F0D /* Die.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Die.swift; sourceTree = "<group>"; };
+		B8D75330277BF51200F89F0D /* DieCup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DieCup.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +70,8 @@
 				B89197FB1F897E77004EEBCE /* Info.plist */,
 				B89197F81F897E77004EEBCE /* LaunchScreen.storyboard */,
 				B81EE6C21F8F1F8C008B04B0 /* Board.swift */,
+				B8D7532E277BEDBC00F89F0D /* Die.swift */,
+				B8D75330277BF51200F89F0D /* DieCup.swift */,
 			);
 			path = Backgammon;
 			sourceTree = "<group>";
@@ -146,7 +152,9 @@
 				B81EE6C11F8F0F3D008B04B0 /* DieView.swift in Sources */,
 				B81EE6C31F8F1F8C008B04B0 /* Board.swift in Sources */,
 				B89198021F89809D004EEBCE /* BoardController.swift in Sources */,
+				B8D7532F277BEDBC00F89F0D /* Die.swift in Sources */,
 				B89197F01F897E77004EEBCE /* AppDelegate.swift in Sources */,
+				B8D75331277BF51200F89F0D /* DieCup.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

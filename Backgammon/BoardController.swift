@@ -18,6 +18,9 @@ class BoardController: UIViewController
     let diceCupPadding: CGFloat = 4.0
     let sidebarWidthRatio: CGFloat = 0.15
 
+    let dieCup1 = DieCup(randomNumberGenerator: SystemRandomNumberGenerator())
+    let dieCup2 = DieCup(randomNumberGenerator: SystemRandomNumberGenerator())
+
     // MARK: - UIViewController
 
     override func viewDidLoad()
@@ -140,9 +143,27 @@ class BoardController: UIViewController
 
     @objc func didTapDice(sender: Any?) -> Void
     {
-        let dieNumber1 = (arc4random() % 6) + 1
-        let dieNumber2 = (arc4random() % 6) + 1
-        _dieView1?.numberLabel?.text = String(dieNumber1)
-        _dieView2?.numberLabel?.text = String(dieNumber2)
+        let result1 = dieToUInt8(die: self.dieCup1.roll())
+        let result2 = dieToUInt8(die: self.dieCup1.roll())
+
+        _dieView1?.numberLabel?.text = String(result1)
+        _dieView2?.numberLabel?.text = String(result2)
+    }
+
+    private func dieToUInt8(die: Die) -> UInt8 {
+        switch die {
+        case .one:
+            return 1
+        case .two:
+            return 2
+        case .three:
+            return 3
+        case .four:
+            return 4
+        case .five:
+            return 5
+        case .six:
+            return 6
+        }
     }
 }
