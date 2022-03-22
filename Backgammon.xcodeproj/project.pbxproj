@@ -16,7 +16,19 @@
 		B89198021F89809D004EEBCE /* BoardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89198011F89809D004EEBCE /* BoardController.swift */; };
 		B8D7532F277BEDBC00F89F0D /* Die.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D7532E277BEDBC00F89F0D /* Die.swift */; };
 		B8D75331277BF51200F89F0D /* DieCup.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D75330277BF51200F89F0D /* DieCup.swift */; };
+		B8D7C58D277C1063006DF707 /* BoardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D7C58C277C1063006DF707 /* BoardTests.swift */; };
+		B8D7C594277C19BB006DF707 /* Board+TestFixtures.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D7C593277C19BB006DF707 /* Board+TestFixtures.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B8D7C58E277C1063006DF707 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B89197E41F897E77004EEBCE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B89197EB1F897E77004EEBCE;
+			remoteInfo = Backgammon;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		B81EE6C01F8F0F3D008B04B0 /* DieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DieView.swift; sourceTree = "<group>"; };
@@ -30,10 +42,20 @@
 		B89198011F89809D004EEBCE /* BoardController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardController.swift; sourceTree = "<group>"; };
 		B8D7532E277BEDBC00F89F0D /* Die.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Die.swift; sourceTree = "<group>"; };
 		B8D75330277BF51200F89F0D /* DieCup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DieCup.swift; sourceTree = "<group>"; };
+		B8D7C58A277C1063006DF707 /* BackgammonTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BackgammonTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B8D7C58C277C1063006DF707 /* BoardTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardTests.swift; sourceTree = "<group>"; };
+		B8D7C593277C19BB006DF707 /* Board+TestFixtures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Board+TestFixtures.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		B89197E91F897E77004EEBCE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B8D7C587277C1063006DF707 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -47,6 +69,7 @@
 			isa = PBXGroup;
 			children = (
 				B89197EE1F897E77004EEBCE /* Backgammon */,
+				B8D7C58B277C1063006DF707 /* BackgammonTests */,
 				B89197ED1F897E77004EEBCE /* Products */,
 			);
 			sourceTree = "<group>";
@@ -55,6 +78,7 @@
 			isa = PBXGroup;
 			children = (
 				B89197EC1F897E77004EEBCE /* Backgammon.app */,
+				B8D7C58A277C1063006DF707 /* BackgammonTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -74,6 +98,15 @@
 				B8D75330277BF51200F89F0D /* DieCup.swift */,
 			);
 			path = Backgammon;
+			sourceTree = "<group>";
+		};
+		B8D7C58B277C1063006DF707 /* BackgammonTests */ = {
+			isa = PBXGroup;
+			children = (
+				B8D7C58C277C1063006DF707 /* BoardTests.swift */,
+				B8D7C593277C19BB006DF707 /* Board+TestFixtures.swift */,
+			);
+			path = BackgammonTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -96,13 +129,31 @@
 			productReference = B89197EC1F897E77004EEBCE /* Backgammon.app */;
 			productType = "com.apple.product-type.application";
 		};
+		B8D7C589277C1063006DF707 /* BackgammonTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B8D7C592277C1063006DF707 /* Build configuration list for PBXNativeTarget "BackgammonTests" */;
+			buildPhases = (
+				B8D7C586277C1063006DF707 /* Sources */,
+				B8D7C587277C1063006DF707 /* Frameworks */,
+				B8D7C588277C1063006DF707 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B8D7C58F277C1063006DF707 /* PBXTargetDependency */,
+			);
+			name = BackgammonTests;
+			productName = BackgammonTests;
+			productReference = B8D7C58A277C1063006DF707 /* BackgammonTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		B89197E41F897E77004EEBCE /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0900;
+				LastSwiftUpdateCheck = 1320;
 				LastUpgradeCheck = 1220;
 				ORGANIZATIONNAME = Prairiedogg;
 				TargetAttributes = {
@@ -110,6 +161,11 @@
 						CreatedOnToolsVersion = 9.0;
 						LastSwiftMigration = 1020;
 						ProvisioningStyle = Automatic;
+					};
+					B8D7C589277C1063006DF707 = {
+						CreatedOnToolsVersion = 13.2.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = B89197EB1F897E77004EEBCE;
 					};
 				};
 			};
@@ -127,6 +183,7 @@
 			projectRoot = "";
 			targets = (
 				B89197EB1F897E77004EEBCE /* Backgammon */,
+				B8D7C589277C1063006DF707 /* BackgammonTests */,
 			);
 		};
 /* End PBXProject section */
@@ -138,6 +195,13 @@
 			files = (
 				B89197FA1F897E77004EEBCE /* LaunchScreen.storyboard in Resources */,
 				B89197F71F897E77004EEBCE /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B8D7C588277C1063006DF707 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -158,7 +222,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B8D7C586277C1063006DF707 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B8D7C594277C19BB006DF707 /* Board+TestFixtures.swift in Sources */,
+				B8D7C58D277C1063006DF707 /* BoardTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B8D7C58F277C1063006DF707 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B89197EB1F897E77004EEBCE /* Backgammon */;
+			targetProxy = B8D7C58E277C1063006DF707 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		B89197F81F897E77004EEBCE /* LaunchScreen.storyboard */ = {
@@ -313,6 +394,49 @@
 			};
 			name = Release;
 		};
+		B8D7C590277C1063006DF707 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = VBA3L48GK8;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = software.greenlight.BackgammonTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Backgammon.app/Backgammon";
+			};
+			name = Debug;
+		};
+		B8D7C591277C1063006DF707 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = VBA3L48GK8;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = software.greenlight.BackgammonTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Backgammon.app/Backgammon";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -330,6 +454,15 @@
 			buildConfigurations = (
 				B89197FF1F897E77004EEBCE /* Debug */,
 				B89198001F897E77004EEBCE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B8D7C592277C1063006DF707 /* Build configuration list for PBXNativeTarget "BackgammonTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B8D7C590277C1063006DF707 /* Debug */,
+				B8D7C591277C1063006DF707 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -105,8 +105,7 @@ enum NextTurn {
     case undecided
 }
 
-struct Board
-{
+struct Board: Equatable {
     let ranks: TwentyFourBackgammonRanks
     let nextTurn: NextTurn
     let blackJail: Rank
@@ -142,6 +141,12 @@ struct Board
 
         return Board(ranks: initialRanks, nextTurn: .undecided, blackJail: .empty, whiteJail: .empty)
     }
+
+    // MARK: - <Equatable>
+
+    static func == (lhs: Board, rhs: Board) -> Bool {
+        return true
+    }
 }
 
 func render(board: Board) -> EnumeratedSequence<[Rank]> {
@@ -156,14 +161,4 @@ enum MoveState
 {
     case valid
     case invalid
-}
-
-func turn(board: Board) -> (MoveState, Board)
-{
-    //    let origin = move.origin
-    //    let destination = move.steps + origin
-    //    let destinationRank = board[destination]
-    //    let currentRank = board[origin]
-
-    return (MoveState.invalid, board)
 }
