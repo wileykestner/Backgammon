@@ -1,21 +1,9 @@
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
-load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
-
-# TODO:
-# When a new version of rules_apple higher than 0.33.0 is released, try upgrading and removing
-# this manual git_repository rule that loads a custom version of rules_swift
-#
-git_repository(
-    name = "build_bazel_rules_swift",
-    remote = "https://github.com/bazelbuild/rules_swift",
-    commit = "7b8558cab8e402eb21e2fc655989bae378171486",
-    shallow_since = "1647912211 -0700",
-)
 
 http_archive(
     name = "build_bazel_rules_apple",
-    url = "https://github.com/bazelbuild/rules_apple/releases/download/0.33.0/rules_apple.0.33.0.tar.gz",
-    sha256 = "a5f00fd89eff67291f6cd3efdc8fad30f4727e6ebb90718f3f05bbf3c3dd5ed7",
+    sha256 = "f94e6dddf74739ef5cb30f000e13a2a613f6ebfa5e63588305a71fce8a8a9911",
+    url = "https://github.com/bazelbuild/rules_apple/releases/download/1.1.3/rules_apple.1.1.3.tar.gz",
 )
 
 load(
@@ -23,11 +11,7 @@ load(
     "apple_rules_dependencies",
 )
 
-# TODO:
-# remove `ignore_version_differences = True` when we can upgrade
-# to a versioned release of rules_apple higher than 0.33.0
-#
-apple_rules_dependencies(ignore_version_differences = True)
+apple_rules_dependencies()
 
 load(
     "@build_bazel_rules_swift//swift:repositories.bzl",
@@ -49,3 +33,4 @@ load(
 )
 
 apple_support_dependencies()
+
