@@ -1,14 +1,17 @@
-load("@build_bazel_rules_apple//apple:ios.bzl", "ios_application")
+load(
+  "@build_bazel_rules_apple//apple:ios.bzl",
+  "ios_application",
+)
 load("@build_bazel_rules_swift//swift:swift.bzl", "swift_library")
-load("@com_github_buildbuddy_io_rules_xcodeproj//xcodeproj:defs.bzl", "top_level_target", "xcodeproj", "xcode_schemes")
 
 ios_application(
     name = "BackgammonApp",
     bundle_id = "com.example.app",
     families = ["iphone", "ipad"],
-    infoplists = [":Info.plist"],
-    minimum_os_version = "15.0",
-    deps = [":BackgammonLibrary"],
+    infoplists = ["Info.plist"],
+    minimum_os_version = "17.0",
+    deps = ["BackgammonLibrary"],
+    visibility = ["//visibility:public"],
 )
 
 swift_library(
@@ -17,20 +20,3 @@ swift_library(
         "*.swift",
     ]),
 )
-
-xcodeproj(
-    name = "BackgammonXcode-BwX",
-    project_name = "Backgammon-BwX",
-    build_mode = "xcode",
-    tags = ["manual"],
-    schemes = [xcode_schemes.scheme(
-        name = "BackgammonLibraryScheme",
-        build_action = xcode_schemes.build_action(
-            targets = ["//Backgammon:BackgammonLibrary"],
-        ),
-    )],
-    top_level_targets = [
-        top_level_target("//Backgammon:BackgammonApp"),
-    ],
-)
-

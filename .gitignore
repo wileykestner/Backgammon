@@ -1,3 +1,2 @@
-Backgammon.xcodeproj/xcuserdata
+**/*xcodeproj/*
 bazel-*
-*.xcodeproj

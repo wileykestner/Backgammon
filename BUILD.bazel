@@ -1,0 +1,14 @@
+load(
+    "@rules_xcodeproj//xcodeproj:defs.bzl",
+    "top_level_target",
+    "xcodeproj",
+)
+
+xcodeproj(
+    name = "xcodeproj",
+    project_name = "Backgammon",
+    tags = ["manual"],
+    top_level_targets = [
+        top_level_target("//Backgammon:BackgammonApp", target_environments = ["simulator"]),
+    ],
+)
