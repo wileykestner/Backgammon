@@ -1,5 +1,5 @@
 import Foundation
-@testable import Backgammon
+@testable import Backgammon_BackgammonLibrary
 
 
 extension Board {

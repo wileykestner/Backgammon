@@ -92,7 +92,7 @@ func getUInt8(stoneCount: StoneCount) -> UInt8 {
     }
 }
 
-enum Rank
+enum Rank: Equatable
 {
     case white(StoneCount)
     case black(StoneCount)

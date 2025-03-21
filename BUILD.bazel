@@ -1,8 +1,8 @@
-load(
-    "@rules_xcodeproj//xcodeproj:defs.bzl",
-    "top_level_target",
-    "xcodeproj",
-)
+load("@build_bazel_rules_apple//apple:ios.bzl", "ios_application", "ios_unit_test")
+load("@build_bazel_rules_apple//apple/testing/default_runner:ios_xctestrun_runner.bzl", "ios_xctestrun_runner")
+load("@build_bazel_rules_swift//swift:swift.bzl", "swift_library")
+load("@rules_xcodeproj//xcodeproj:defs.bzl", "top_level_target", "xcodeproj")
+
 
 xcodeproj(
     name = "xcodeproj",
@@ -10,5 +10,36 @@ xcodeproj(
     tags = ["manual"],
     top_level_targets = [
         top_level_target("//Backgammon:BackgammonApp", target_environments = ["simulator"]),
+        ":BackgammonTests",
     ],
+)
+
+swift_library(
+    name = "BackgammonTestsLibrary",
+    testonly = True,
+    srcs = glob([
+        "BackgammonTests/*.swift",
+    ]),
+    deps = [
+        "//Backgammon:BackgammonLibrary",
+    ]
+)
+
+ios_xctestrun_runner(
+    name = "TestRunner",
+    create_xcresult_bundle = False,
+    device_type = "iPhone 16 Pro",
+    os_version = "18.3",
+    random = True,
+    visibility = ["//visibility:public"]
+)
+
+ios_unit_test(
+    name="BackgammonTests",
+    minimum_os_version="18.3",
+    runner=":TestRunner",
+    visibility = ["//visibility:public"],
+    deps=[
+        ":BackgammonTestsLibrary",
+    ]
 )
